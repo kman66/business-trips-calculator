@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Employee list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/index}">My business trips</a>
+    <a href="#news">Projects</a>
+    <a th:href="@{/employeeList}" class="active">Employees</a>
+    <a href="#about">About</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+<div class="content">
+    <div>
+        <h3>Add a new employee</h3>
+        <form>
+            <input type="text" />
+            <input type="text" />
+            <input type="submit" value="Submit"/>
+        </form>
+
+        <!--
+        <form class="add-new-employee-form" th:action="@{/employeeList}"
+              th:object="${employeeForm}" method="POST">
+            <input type="text" th:field="*{forename}" placeholder="Enter forename.." required="true" />
+            <input type="text" th:field="*{surname}" placeholder="Enter surname.." required="true" />
+            <input class="add-employee-submit-button" type="submit" value="Submit" />
+        </form>
+        -->
+
+        <!-- Check if errorMessage is not null and not empty -->
+        <!--
+        <div th:if="${errorMessage}" th:utext="${errorMessage}"
+             style="color:red;font-style:italic;">
+            ...
+        </div>
+        -->
+    </div>
+</div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>
+

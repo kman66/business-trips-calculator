@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -61,7 +60,7 @@ public class EmployeeControllerTestSuite {
     @Test
     public void shouldDeleteEmployee() throws Exception {
         //Given
-        Mockito.doNothing().when(employeeController).deleteTask(1L);
+        Mockito.doNothing().when(employeeController).deleteEmployee(1L);
         //When & Then
         mockMvc.perform(delete("/v1/employees/1")
                 .contentType(MediaType.APPLICATION_JSON))

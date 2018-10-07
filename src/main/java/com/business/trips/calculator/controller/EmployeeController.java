@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/employees/{employeeId}")
-    public void deleteTask(@PathVariable Long employeeId) throws EmployeeNotFoundException {
+    public void deleteEmployee(@PathVariable Long employeeId) throws EmployeeNotFoundException {
         try {
             employeeRepository.delete(employeeId);
         } catch(EmptyResultDataAccessException e) {
