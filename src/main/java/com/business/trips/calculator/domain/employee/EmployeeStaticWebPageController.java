@@ -45,7 +45,7 @@ public class EmployeeStaticWebPageController {
                 && surname != null && surname.length() > 0
                 && forename.length() <= 50 && surname.length() <= 50) {
             employeeController.createEmployee(new EmployeeDto(forename, surname));
-            return employeeList(model);
+            return "redirect:/employees";
         }
 
         model.addAttribute("nameTooLongMessage", nameTooLongMessage);
