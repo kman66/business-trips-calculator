@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" />
+<html>
 <head>
     <meta charset="UTF-8" />
     <title>Business trips</title>
@@ -9,15 +10,15 @@
 </head>
 <body>
 <div class="topnav" id="myTopnav">
-    <a th:href="@{/}" class="active">My business trips</a>
-    <a th:href="@{/projects}">Projects</a>
+    <a th:href="@{/}">My business trips</a>
+    <a th:href="@{/projects}" class="active">Projects</a>
     <a th:href="@{/employees}">Employees</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
     </a>
 </div>
 <div class="content">
-    <p class="heading">Business trips</p>
+    <p class="heading">Projects</p>
 </div>
 
 <script>

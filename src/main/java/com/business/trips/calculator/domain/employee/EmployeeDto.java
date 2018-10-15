@@ -1,8 +1,9 @@
-package com.business.trips.calculator.domain;
+package com.business.trips.calculator.domain.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +16,14 @@ public class EmployeeDto {
     public EmployeeDto(String forename, String surname) {
         this.forename = forename;
         this.surname = surname;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDto{" +
+                "id=" + id +
+                ", forename='" + forename + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

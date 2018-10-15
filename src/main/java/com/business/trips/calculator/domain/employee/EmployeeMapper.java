@@ -1,7 +1,8 @@
-package com.business.trips.calculator.mapper;
+package com.business.trips.calculator.domain.employee;
 
-import com.business.trips.calculator.domain.Employee;
-import com.business.trips.calculator.domain.EmployeeDto;
+import com.business.trips.calculator.domain.employee.Employee;
+import com.business.trips.calculator.domain.employee.EmployeeDto;
+import com.business.trips.calculator.domain.employee.EmployeeForm;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,5 +30,13 @@ public class EmployeeMapper {
         return employeeList.stream()
                 .map(t -> new EmployeeDto(t.getId(), t.getForename(), t.getSurname()))
                 .collect(Collectors.toList());
+    }
+
+    public EmployeeForm mapFromEmployeeDtoToEmployeeForm(final EmployeeDto employeeDto) {
+        return new EmployeeForm(
+                employeeDto.getId(),
+                employeeDto.getForename(),
+                employeeDto.getSurname()
+        );
     }
 }

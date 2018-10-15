@@ -1,9 +1,8 @@
-package com.business.trips.calculator.domain;
+package com.business.trips.calculator.domain.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -13,8 +12,9 @@ import javax.persistence.*;
 @Entity(name = "EMPLOYEES")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "employees_seq")
+    @SequenceGenerator(name = "employees_seq", sequenceName = "public.employees_id_seq")
+    @Column(name = "ID", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "FORENAME")

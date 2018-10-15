@@ -1,6 +1,7 @@
-package com.business.trips.calculator.controller;
+package com.business.trips.calculator.domain.employee;
 
-import com.business.trips.calculator.domain.EmployeeDto;
+import com.business.trips.calculator.domain.employee.EmployeeController;
+import com.business.trips.calculator.domain.employee.EmployeeDto;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;

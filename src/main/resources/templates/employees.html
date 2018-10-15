@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Employees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/}">My business trips</a>
+    <a th:href="@{/projects}">Projects</a>
+    <a th:href="@{/employees}" class="active">Employees</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+<div class="content">
+    <div id="addEmployee">
+        <form class="add-new-employee-form" th:action="@{/employees}"
+              th:object="${employeeForm}" method="POST">
+            <input class="add-employee-forename-input" type="text" th:field="*{forename}" placeholder="Enter forename.." required="true" />
+            <input class="add-employee-surname-input" type="text" th:field="*{surname}" placeholder="Enter surname.." required="true" />
+            <input class="add-employee-submit-button" type="submit" value="Submit" />
+        </form>
+        <!-- Check if nameTooLongMessage is not null and not empty -->
+        <div th:if="${nameTooLongMessage}" th:utext="${nameTooLongMessage}"
+             style="color:red;font-style:italic;padding-bottom: 10px">
+            ...
+        </div>
+    </div>
+    <table class="employee-list-table">
+        <tr>
+            <th>Id</th>
+            <th>Forename</th>
+            <th>Surname</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each ="employee : ${employees}">
+            <td class="employee-list-first-td" th:utext="${employee.getId()}">...</td>
+            <td class="employee-list-second-td" th:utext="${employee.getForename()}">...</td>
+            <td class="employee-list-third-td" th:utext="${employee.getSurname()}">...</td>
+            <td class="employee-list-fourth-td">
+                <form action="/updateEmployee" th:action="@{/updateEmployee}" method="GET">
+                    <input type="hidden" th:value="${employee.getId()}" name="employeeId" />
+                    <button class="employee-list-edit-button" type="submit"><i class="fa fa-edit"></i></button>
+                </form>
+            </td>
+            <td class="employee-list-fifth-td">
+                <form action="/deleteEmployee" th:action="@{/deleteEmployee}" method="POST">
+                    <input type="hidden" th:value="${employee.getId()}" name="employeeId" />
+                    <button class="employee-list-delete-button" type="submit"><i class="fa fa-trash"></i></button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <!-- Check if noEmployeesMessage is not null and not empty -->
+    <div th:if="${noEmployeesMessage}" th:utext="${noEmployeesMessage}"
+         style="color:gray;font-style:italic;padding-top: 10px">
+        ...
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>
+

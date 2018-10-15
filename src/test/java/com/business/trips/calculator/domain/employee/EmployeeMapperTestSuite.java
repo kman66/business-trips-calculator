@@ -1,7 +1,9 @@
-package com.business.trips.calculator.mapper;
+package com.business.trips.calculator.domain.employee;
 
-import com.business.trips.calculator.domain.Employee;
-import com.business.trips.calculator.domain.EmployeeDto;
+import com.business.trips.calculator.domain.employee.Employee;
+import com.business.trips.calculator.domain.employee.EmployeeDto;
+import com.business.trips.calculator.domain.employee.EmployeeForm;
+import com.business.trips.calculator.domain.employee.EmployeeMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,14 @@ public class EmployeeMapperTestSuite {
     @Autowired
     private EmployeeMapper employeeMapper;
 
+    private EmployeeDto createEmployeeDto() {
+        return new EmployeeDto(1L, "John", "Smith");
+    }
+
     @Test
     public void shouldMapToEmployeeDto() {
         //Given
-        EmployeeDto employeeDto = new EmployeeDto(1L, "John", "Smith");
+        EmployeeDto employeeDto = createEmployeeDto();
         //When
         Employee employee = employeeMapper.mapToEmployee(employeeDto);
         //Then
@@ -71,5 +77,19 @@ public class EmployeeMapperTestSuite {
         assertEquals(66L, employeeDtoList.get(2).getId(), 0);
         assertEquals("Annie", employeeDtoList.get(2).getForename());
         assertEquals("Flowe", employeeDtoList.get(2).getSurname());
+    }
+
+    @Test
+    public void shouldMapFromEmployeeDtoToEmployeeForm() {
+        //Given
+        EmployeeDto employeeDto = createEmployeeDto();
+        //When
+        EmployeeForm employeeForm = employeeMapper.mapFromEmployeeDtoToEmployeeForm(employeeDto);
+        //Then
+        assertNotNull(employeeForm);
+        assertTrue(employeeForm instanceof EmployeeForm);
+        assertEquals(1L, employeeForm.getId(),0);
+        assertEquals("John", employeeForm.getForename());
+        assertEquals("Smith", employeeForm.getSurname());
     }
 }

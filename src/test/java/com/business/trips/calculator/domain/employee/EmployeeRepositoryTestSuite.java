@@ -1,8 +1,9 @@
-package com.business.trips.calculator.repository;
+package com.business.trips.calculator.domain.employee;
 
-import com.business.trips.calculator.domain.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -15,6 +16,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EmployeeRepositoryTestSuite {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRepositoryTestSuite.class);
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -44,7 +47,7 @@ public class EmployeeRepositoryTestSuite {
         try {
             employeeRepository.delete(id);
         } catch(Exception e) {
-
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -52,6 +55,7 @@ public class EmployeeRepositoryTestSuite {
     public void shouldFindAllEmployees() {
         //Given
         List<Employee> employeeList = createEmployees();
+        Long noOfRecordsBeforeSave = employeeRepository.count();
         employeeRepository.save(employeeList);
         Employee johnSmith = employeeList.get(0);
         Employee johnBean = employeeList.get(1);
@@ -59,21 +63,23 @@ public class EmployeeRepositoryTestSuite {
         //When
         List<Employee> fetchedEmployeeList = employeeRepository.findAll();
         //Then
-        assertEquals(3, fetchedEmployeeList.size());
-        assertEquals(johnSmith.getId(), fetchedEmployeeList.get(0).getId());
-        assertEquals(johnBean.getId(), fetchedEmployeeList.get(1).getId());
-        assertEquals(agatheCrispy.getId(), fetchedEmployeeList.get(2).getId());
-        assertEquals(johnSmith.getForename(), fetchedEmployeeList.get(0).getForename());
-        assertEquals(johnBean.getForename(), fetchedEmployeeList.get(1).getForename());
-        assertEquals(agatheCrispy.getForename(), fetchedEmployeeList.get(2).getForename());
-        assertEquals(johnSmith.getSurname(), fetchedEmployeeList.get(0).getSurname());
-        assertEquals(johnBean.getSurname(), fetchedEmployeeList.get(1).getSurname());
-        assertEquals(agatheCrispy.getSurname(), fetchedEmployeeList.get(2).getSurname());
+        assertEquals(noOfRecordsBeforeSave+3, fetchedEmployeeList.size());
+        assertEquals(johnSmith.getId(), fetchedEmployeeList.get(fetchedEmployeeList.size()-3).getId());
+        assertEquals(johnBean.getId(), fetchedEmployeeList.get(fetchedEmployeeList.size()-2).getId());
+        assertEquals(agatheCrispy.getId(), fetchedEmployeeList.get(fetchedEmployeeList.size()-1).getId());
+        assertEquals(johnSmith.getForename(), fetchedEmployeeList.get(fetchedEmployeeList.size()-3).getForename());
+        assertEquals(johnBean.getForename(), fetchedEmployeeList.get(fetchedEmployeeList.size()-2).getForename());
+        assertEquals(agatheCrispy.getForename(), fetchedEmployeeList.get(fetchedEmployeeList.size()-1).getForename());
+        assertEquals(johnSmith.getSurname(), fetchedEmployeeList.get(fetchedEmployeeList.size()-3).getSurname());
+        assertEquals(johnBean.getSurname(), fetchedEmployeeList.get(fetchedEmployeeList.size()-2).getSurname());
+        assertEquals(agatheCrispy.getSurname(), fetchedEmployeeList.get(fetchedEmployeeList.size()-1).getSurname());
 
         try {
-            employeeRepository.delete(fetchedEmployeeList);
+            employeeRepository.delete(johnSmith.getId());
+            employeeRepository.delete(johnBean.getId());
+            employeeRepository.delete(agatheCrispy.getId());
         } catch (Exception e) {
-
+            LOGGER.error(e.getMessage());
         }
     }
 }

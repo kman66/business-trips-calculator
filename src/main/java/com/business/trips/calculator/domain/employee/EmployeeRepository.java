@@ -1,6 +1,6 @@
-package com.business.trips.calculator.repository;
+package com.business.trips.calculator.domain.employee;
 
-import com.business.trips.calculator.domain.Employee;
+import com.business.trips.calculator.domain.employee.Employee;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

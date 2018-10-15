@@ -51,13 +51,15 @@ body {
 }
 
 .add-new-employee-form {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-color: #ddd;
     border-width: 1px;
     border-style: solid;
 }
 
 input[type=text] {
-    width: 44%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -67,6 +69,11 @@ input[type=text] {
     margin-right: 1px;
     margin-left: 16px;
     resize: vertical;
+}
+
+.add-employee-forename-input,
+.add-employee-surname-input {
+    width: 44%;
 }
 
 input[type=text]:focus {
@@ -85,25 +92,32 @@ input[type=text]:focus {
     padding: 16px;
 }
 
-.employee-list-third-td {
-    text-align: center;
-    width: 10%;
-}
-
 .employee-list-first-td {
     text-align: left;
     width: 5%;
 }
 
+.employee-list-second-td,
+.employee-list-third-td {
+    width: 44%;
+}
+
+.employee-list-fourth-td {
+    text-align: right;
+    width: 2%;
+}
+
+.employee-list-fifth-td {
+    text-align: left;
+    width: 2%;
+}
+
 .employee-list-table tr:nth-child(even) {
     background-color: #f2f2f2
 }
-.add-employee-btn-group {
-    display: inline-block;
-}
 
-.employee-list-delete-button,
-.add-employee-submit-button {
+button,
+input[type=submit] {
     background-color: DodgerBlue;
     border: none;
     border-radius: 2px;
@@ -115,8 +129,8 @@ input[type=text]:focus {
     cursor: pointer;
 }
 
-.employee-list-delete-button:hover,
-.add-employee-submit-button:hover {
+button:hover,
+input[type=submit]:hover {
     background-color: RoyalBlue;
 }
 
@@ -140,4 +154,75 @@ input[type=text]:focus {
         display: block;
         text-align: left;
     }
+}
+
+.edit-employee-forename,
+.edit-employee-surname {
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-right: 1px;
+    margin-left: 16px;
+    resize: vertical;
+}
+
+.update-employee-form {
+    display: block;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: #ddd;
+    border-width: 1px;
+    border-style: solid;
+}
+
+
+
+label {
+    display: inline-block;
+    padding: 12px;
+    box-sizing: border-box;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-right: 1px;
+    margin-left: 16px;
+    resize: vertical;
+}
+
+.container {
+    max-width: 600px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.update-employee-forename-input,
+.update-employee-surname-input {
+    width: 85%;
+}
+.update-employee-btn-group {
+    text-align: right;
 }
