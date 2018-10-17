@@ -16,4 +16,6 @@ public interface ParameterRepository extends CrudRepository<Parameter, Long> {
     Parameter save(Parameter parameter);
 
     Optional<Parameter> findById(Long id);
+
+    Optional<Parameter> findByName(String name);
 }

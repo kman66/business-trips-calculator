@@ -106,4 +106,24 @@ public class ParameterRepositoryTestSuite {
             LOGGER.error("Error during deleting parameter.", e);
         }
     }
+
+    @Test
+    public void shouldFindByName() {
+        //Given
+        List<Parameter> parameters = createParameters();
+        parameterRepository.save(parameters);
+        Parameter parameter1 = parameters.get(0);
+        //When
+        Optional<Parameter> fetchedParameter = parameterRepository.findByName("parameter1");
+        //Then
+        Assert.assertEquals(parameter1.getId(), fetchedParameter.get().getId());
+        Assert.assertEquals(parameter1.getName(), fetchedParameter.get().getName());
+        Assert.assertEquals(parameter1.getValue(), fetchedParameter.get().getValue());
+        //Clean up
+        try {
+            parameterRepository.delete(parameters);
+        } catch (Exception e) {
+            LOGGER.error("Error during deleting parameter.", e);
+        }
+    }
 }

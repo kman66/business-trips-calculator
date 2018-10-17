@@ -1,5 +1,6 @@
 package com.business.trips.calculator.domain.currencies;
 
+import com.business.trips.calculator.domain.parameters.Parameter;
 import com.business.trips.calculator.domain.parameters.ParameterDto;
 import com.business.trips.calculator.domain.parameters.ParameterMapper;
 import com.business.trips.calculator.domain.parameters.ParameterRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,11 +44,14 @@ public class NbpDbService {
         List<NbpTableADto> nbpTableADtoList = nbpClient.getNbpTableA();
         List<NbpCurrencyRateDto> nbpCurrencyRateDtoList = fetchCurrenciesFromTableA(nbpTableADtoList);
         LOGGER.info("Saving NBP currency rates..");
+        Long effectiveDataParameterId = parameterRepository.findByName("fetched_currencies_effective_date").get().getId();
         parameterRepository.save(
                 parameterMapper.mapToParameter(new ParameterDto(
+                        effectiveDataParameterId,
                         "fetched_currencies_effective_date",
                         nbpTableADtoList.get(0).getEffectiveDate()))
         );
+        nbpRepository.deleteAll();
         nbpCurrencyRateDtoList.stream()
                 .forEach(c -> nbpRepository.save(
                         nbpCurrencyRateMapper.mapToNbpCurrencyRate(c)
