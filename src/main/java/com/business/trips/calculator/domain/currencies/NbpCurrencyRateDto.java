@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,12 +17,4 @@ public class NbpCurrencyRateDto {
     private Long id;
     private String code;
     private BigDecimal mid;
-    @JsonIgnore
-    private LocalDateTime fetchedOn;
-
-    public NbpCurrencyRateDto(Long id, String code, BigDecimal mid) {
-        this.id = id;
-        this.code = code;
-        this.mid = mid;
-    }
 }

@@ -43,11 +43,11 @@ public class EmployeeRepositoryTestSuite {
         assertEquals(id, fetchedEmployee.getId());
         assertEquals(surname, fetchedEmployee.getSurname());
         assertEquals(forename, fetchedEmployee.getForename());
-
+        //Clean up
         try {
             employeeRepository.delete(id);
         } catch(Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("Error during deleting employee.", e);
         }
     }
 
@@ -73,13 +73,13 @@ public class EmployeeRepositoryTestSuite {
         assertEquals(johnSmith.getSurname(), fetchedEmployeeList.get(fetchedEmployeeList.size()-3).getSurname());
         assertEquals(johnBean.getSurname(), fetchedEmployeeList.get(fetchedEmployeeList.size()-2).getSurname());
         assertEquals(agatheCrispy.getSurname(), fetchedEmployeeList.get(fetchedEmployeeList.size()-1).getSurname());
-
+        //Clean up
         try {
             employeeRepository.delete(johnSmith.getId());
             employeeRepository.delete(johnBean.getId());
             employeeRepository.delete(agatheCrispy.getId());
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("Error during deleting employees.", e);
         }
     }
 }

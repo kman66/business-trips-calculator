@@ -11,10 +11,13 @@ import java.util.List;
 public class NbpCurrencyController {
 
     @Autowired
-    private NbpCurrencyService nbpCurrencyService;
+    private NbpDbService nbpDbService;
+
+    @Autowired
+    private NbpCurrencyRateMapper nbpCurrencyRateMapper;
 
     @GetMapping(value = "/currencies")
     public List<NbpCurrencyRateDto> getNbpCurrencies() {
-        return nbpCurrencyService.fetchCurrencies();
+        return nbpCurrencyRateMapper.mapToNbpCurrencyRateDtoList(nbpDbService.fetchNbpCurrencyRates());
     }
 }

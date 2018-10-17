@@ -1,5 +1,6 @@
 package com.business.trips.calculator.domain.currencies;
 
+import com.business.trips.calculator.domain.currencies.NbpCurrencyRate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
