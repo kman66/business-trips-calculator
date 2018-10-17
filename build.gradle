@@ -10,9 +10,29 @@ buildscript {
 	}
 }
 
+
+plugins {
+	id "org.flywaydb.flyway" version "5.1.4"
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/business_trips'
+	user = 'project_user'
+	password = 'business_trips'
+}
+
+/*
+flyway {
+	url = 'jdbc:postgresql://ec2-107-22-221-60.compute-1.amazonaws.com:5432/de0fdt0dc4kua3?sslmode=require'
+	user = 'hoissuroebdxwn'
+	password = '01b026c5bed3c94e16230a1fa632043b5a1863f1e7403a272d5a95a2412a6326'
+}
+ */
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'com.business.trips'
 version = '0.0.1-SNAPSHOT'
@@ -22,8 +42,18 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.projectlombok:lombok')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('com.google.code.gson:gson:2.8.2')
+
+	// Swagger
+	compile('io.springfox:springfox-swagger2:2.7.0')
+	compile('io.springfox:springfox-swagger-ui:2.7.0')
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

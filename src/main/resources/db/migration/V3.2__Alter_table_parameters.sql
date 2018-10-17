@@ -1,0 +1,2 @@
+ALTER TABLE PARAMETERS
+    ADD CONSTRAINT name_unique UNIQUE (name);
