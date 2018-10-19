@@ -105,4 +105,24 @@ public class NbpRepositoryTestSuite {
             LOGGER.error("Error during deleting parameter.", e);
         }
     }
+
+    @Test
+    public void shouldFindByCode() {
+        //Given
+        List<NbpCurrencyRate> nbpCurrencyRates = createNbpCurrencyRates();
+        nbpRepository.save(nbpCurrencyRates);
+        NbpCurrencyRate nbpCurrencyRateAaa = nbpCurrencyRates.get(0);
+        //When
+        Optional<NbpCurrencyRate> fetchedNbpCurrencyRate = nbpRepository.findByCode("AAA");
+        //Then
+        Assert.assertEquals(nbpCurrencyRateAaa.getId(), fetchedNbpCurrencyRate.get().getId());
+        Assert.assertEquals(nbpCurrencyRateAaa.getCode(), fetchedNbpCurrencyRate.get().getCode());
+        Assert.assertEquals(nbpCurrencyRateAaa.getMid(), fetchedNbpCurrencyRate.get().getMid());
+        //Clean up
+        try {
+            nbpRepository.delete(nbpCurrencyRates);
+        } catch (Exception e) {
+            LOGGER.error("Error during deleting parameter.", e);
+        }
+    }
 }

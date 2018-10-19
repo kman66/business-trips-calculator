@@ -27,6 +27,9 @@ public class EmployeeController {
     @Autowired
     private EmployeeMapper employeeMapper;
 
+    @Autowired
+    private EmployeeDbService employeeDbService;
+
     @GetMapping(value = "/employees")
     public List<EmployeeDto> getEmployees() {
         LOGGER.info("Extracting all employees from database...");
@@ -37,11 +40,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/employees/{employeeId}")
     public EmployeeDto getEmployee(@PathVariable Long employeeId) throws EmployeeNotFoundException {
-        LOGGER.info("Extracting employee with id=" + employeeId + "...");
-        EmployeeDto extractedEmployeeDto = employeeMapper.mapToEmployeeDto(employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new EmployeeNotFoundException("Employee with id=" + employeeId + " has not been found.")));
-        LOGGER.info("...extracted employee: " + extractedEmployeeDto);
-        return extractedEmployeeDto;
+        return employeeDbService.extractEmployeeFromDbOrThrowException(employeeId);
     }
 
     @DeleteMapping(value = "/employees/{employeeId}")
@@ -57,20 +56,14 @@ public class EmployeeController {
 
     @PutMapping(value = "/employees")
     public EmployeeDto updateEmployee(@RequestBody EmployeeDto employeeDto) {
-        EmployeeDto extractedEmployeeDto = employeeMapper.mapToEmployeeDto(employeeRepository.findById(employeeDto.getId())
-                .orElseThrow(() -> new EmployeeNotFoundException("Employee with id=" + employeeDto.getId() + " has not been found.")));
-        LOGGER.info("Updating employee: " + extractedEmployeeDto);
-        EmployeeDto updatedEmployeeDto = employeeMapper.mapToEmployeeDto(employeeRepository
-                .save(employeeMapper.mapToEmployee(employeeDto)));
-        LOGGER.info("Employee after update: " + updatedEmployeeDto);
-        return updatedEmployeeDto;
+        return employeeDbService.updateEmployeeInDb(employeeDto);
     }
 
     @PostMapping(value = "/employees", consumes = APPLICATION_JSON_VALUE)
     public void createEmployee(@RequestBody EmployeeDto employeeDto) {
         LOGGER.info("Saving new employee: " + employeeDto);
-        EmployeeDto createdEmplyoeeDto = employeeMapper.mapToEmployeeDto(employeeRepository
-                .save(employeeMapper.mapToEmployee(employeeDto)));
+        EmployeeDto createdEmplyoeeDto = employeeMapper.getMapperFacade().map(employeeRepository
+                .save(employeeMapper.getMapperFacade().mapReverse(employeeDto)));
         LOGGER.info("New employee: " + createdEmplyoeeDto + " successfully created.");
     }
 }

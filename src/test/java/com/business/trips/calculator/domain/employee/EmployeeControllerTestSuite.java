@@ -24,8 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(EmployeeController.class)
 public class EmployeeControllerTestSuite {
+
     @Autowired
     private MockMvc mockMvc;
+
     @MockBean
     private EmployeeController employeeController;
 

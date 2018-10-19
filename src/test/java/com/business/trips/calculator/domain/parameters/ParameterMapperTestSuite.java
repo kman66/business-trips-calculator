@@ -18,34 +18,6 @@ public class ParameterMapperTestSuite {
     private ParameterMapper parameterMapper;
 
     @Test
-    public void shouldMapToParameter() {
-        //Given
-        ParameterDto parameterDto = new ParameterDto(1L,"Test name", "Test value");
-        //When
-        Parameter mappedParameter = parameterMapper.mapToParameter(parameterDto);
-        //Then
-        Assert.assertNotNull(mappedParameter);
-        Assert.assertTrue(mappedParameter instanceof Parameter);
-        Assert.assertEquals(1L, mappedParameter.getId(), 0);
-        Assert.assertEquals("Test name", mappedParameter.getName());
-        Assert.assertEquals("Test value", mappedParameter.getValue());
-    }
-
-    @Test
-    public void shouldMapToParameterDto() {
-        //Given
-        Parameter parameter = new Parameter(1L,"Test name", "Test value");
-        //When
-        ParameterDto mappedParameterDto = parameterMapper.mapToParameterDto(parameter);
-        //Then
-        Assert.assertNotNull(mappedParameterDto);
-        Assert.assertTrue(mappedParameterDto instanceof ParameterDto);
-        Assert.assertEquals(1L, mappedParameterDto.getId(), 0);
-        Assert.assertEquals("Test name", mappedParameterDto.getName());
-        Assert.assertEquals("Test value", mappedParameterDto.getValue());
-    }
-
-    @Test
     public void shouldMapToParameterDtoList() {
         //Given
         List<Parameter> parameters = new ArrayList<>();

@@ -18,7 +18,7 @@ public class NbpCurrencyRate {
     @Column(name = "ID", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "CODE")
+    @Column(name = "CODE", unique = true, updatable = true)
     private String code;
 
     @Column(name = "MID")

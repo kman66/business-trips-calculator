@@ -1,8 +1,8 @@
 package com.business.trips.calculator.domain.employee;
 
-import com.business.trips.calculator.domain.employee.Employee;
-import com.business.trips.calculator.domain.employee.EmployeeDto;
-import com.business.trips.calculator.domain.employee.EmployeeForm;
+import ma.glasnost.orika.BoundMapperFacade;
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class EmployeeMapper {
 
     public List<EmployeeDto> mapToEmployeeDtoList(final List<Employee> employeeList) {
         return employeeList.stream()
-                .map(t -> new EmployeeDto(t.getId(), t.getForename(), t.getSurname()))
+                .map(t -> getMapperFacade().map(t))
                 .collect(Collectors.toList());
     }
 
@@ -38,5 +38,10 @@ public class EmployeeMapper {
                 employeeDto.getForename(),
                 employeeDto.getSurname()
         );
+    }
+
+    public BoundMapperFacade<Employee, EmployeeDto> getMapperFacade() {
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        return mapperFactory.getMapperFacade(Employee.class, EmployeeDto.class);
     }
 }

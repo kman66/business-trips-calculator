@@ -17,7 +17,7 @@ public class Parameter {
     @Column(name = "ID", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", unique = true, updatable = true)
     private String name;
 
     @Column(name = "VALUE")

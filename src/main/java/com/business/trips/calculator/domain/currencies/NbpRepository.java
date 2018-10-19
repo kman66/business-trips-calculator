@@ -17,4 +17,6 @@ public interface NbpRepository extends CrudRepository<NbpCurrencyRate, Long> {
 
     Optional<NbpCurrencyRate> findById(Long currencyId);
 
+    Optional<NbpCurrencyRate> findByCode(String code);
+
 }
