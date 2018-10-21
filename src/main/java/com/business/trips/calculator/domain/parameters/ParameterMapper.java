@@ -10,6 +10,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class ParameterMapper {
+
+    public ParameterDto mapToParameterDto(final Parameter parameter) {
+        return new ParameterDto(
+                parameter.getId(),
+                parameter.getName(),
+                parameter.getValue()
+        );
+    }
+
     public List<ParameterDto> mapToParameterDtoList(final List<Parameter> parameters) {
         return parameters.stream()
                 .map(p -> getMapperFacade().map(p))

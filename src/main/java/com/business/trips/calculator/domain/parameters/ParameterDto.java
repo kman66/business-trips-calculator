@@ -16,4 +16,13 @@ public class ParameterDto {
         this.name = name;
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "ParameterDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
