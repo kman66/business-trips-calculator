@@ -24,8 +24,8 @@ public class NbpCurrencyRateMapperTestSuite {
     public void shouldMapToNbpCurrencyRateDtoList() {
         //Given
         List<NbpCurrencyRate> nbpCurrencyRates = new ArrayList<>();
-        nbpCurrencyRates.add(new NbpCurrencyRate(34L, "XXX", BigDecimal.valueOf(4.56211).setScale(5)));
-        nbpCurrencyRates.add(new NbpCurrencyRate(37L, "ZZZ", BigDecimal.valueOf(1.45234).setScale(5)));
+        nbpCurrencyRates.add(new NbpCurrencyRate(34L, "XXX", BigDecimal.valueOf(4.56211).setScale(5), "Test name 1"));
+        nbpCurrencyRates.add(new NbpCurrencyRate(37L, "ZZZ", BigDecimal.valueOf(1.45234).setScale(5), "Test name 2"));
         //When
         List<NbpCurrencyRateDto> mappedNbpCurrencyDtoList = nbpCurrencyRateMapper.mapToNbpCurrencyRateDtoList(nbpCurrencyRates);
         //Then
@@ -35,9 +35,11 @@ public class NbpCurrencyRateMapperTestSuite {
         assertEquals(34L, mappedNbpCurrencyDtoList.get(0).getId(), 0);
         assertEquals("XXX", mappedNbpCurrencyDtoList.get(0).getCode());
         assertEquals(BigDecimal.valueOf(4.56211).setScale(5), mappedNbpCurrencyDtoList.get(0).getMid());
+        assertEquals("Test name 1", mappedNbpCurrencyDtoList.get(0).getCurrencyName());
         assertTrue(mappedNbpCurrencyDtoList.get(1) instanceof NbpCurrencyRateDto);
         assertEquals(37L, mappedNbpCurrencyDtoList.get(1).getId(), 0);
         assertEquals("ZZZ", mappedNbpCurrencyDtoList.get(1).getCode());
         assertEquals(BigDecimal.valueOf(1.45234).setScale(5), mappedNbpCurrencyDtoList.get(1).getMid());
+        assertEquals("Test name 2", mappedNbpCurrencyDtoList.get(1).getCurrencyName());
     }
 }

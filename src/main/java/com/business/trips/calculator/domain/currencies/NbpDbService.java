@@ -37,7 +37,11 @@ public class NbpDbService {
     @Autowired
     private ParameterMapper parameterMapper;
 
-    private List<NbpCurrencyRateDto> fetchCurrenciesFromTableA(final List<NbpTableADto> nbpTableADtoList) {
+    /**
+     * Access modifier was changed from private to default to enhance
+     * testability
+     */
+    List<NbpCurrencyRateDto> fetchCurrenciesFromTableA(final List<NbpTableADto> nbpTableADtoList) {
         return nbpTableADtoList.stream()
                 .map(t -> t.getCurrencyRateDtos())
                 .flatMap(List::stream)

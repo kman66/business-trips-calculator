@@ -17,4 +17,5 @@ public class NbpCurrencyRateDto {
     private Long id;
     private String code;
     private BigDecimal mid;
+    private String currencyName;
 }

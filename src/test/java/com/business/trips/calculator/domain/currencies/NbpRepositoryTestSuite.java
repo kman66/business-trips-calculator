@@ -27,8 +27,8 @@ public class NbpRepositoryTestSuite {
 
     private List<NbpCurrencyRate> createNbpCurrencyRates() {
         List<NbpCurrencyRate> currencyRates = new ArrayList<>();
-        currencyRates.add(new NbpCurrencyRate("AAA", BigDecimal.valueOf(1.22450).setScale(5)));
-        currencyRates.add(new NbpCurrencyRate("BBB", BigDecimal.valueOf(20.20030).setScale(5)));
+        currencyRates.add(new NbpCurrencyRate("AAA", BigDecimal.valueOf(1.22450).setScale(5), "Name A"));
+        currencyRates.add(new NbpCurrencyRate("BBB", BigDecimal.valueOf(20.20030).setScale(5), "Name B"));
         currencyRates.add(new NbpCurrencyRate("CCC", BigDecimal.valueOf(156.20000).setScale(5)));
         return currencyRates;
     }
@@ -43,11 +43,13 @@ public class NbpRepositoryTestSuite {
         Long id = nbpCurrencyRate.getId();
         String code = nbpCurrencyRate.getCode();
         BigDecimal mid = nbpCurrencyRate.getMid();
+        String currencyName = nbpCurrencyRate.getCurrencyName();
         NbpCurrencyRate fetchedNbpCurrencyRate = nbpRepository.findOne(id);
         Assert.assertNotNull(fetchedNbpCurrencyRate);
         Assert.assertEquals(id, fetchedNbpCurrencyRate.getId());
         Assert.assertEquals(code, fetchedNbpCurrencyRate.getCode());
         Assert.assertEquals(mid, fetchedNbpCurrencyRate.getMid());
+        Assert.assertEquals(currencyName, fetchedNbpCurrencyRate.getCurrencyName());
         //Clean up
         try {
             nbpRepository.delete(nbpCurrencyRate.getId());
@@ -72,12 +74,15 @@ public class NbpRepositoryTestSuite {
         Assert.assertEquals(nbpCurrencyRateAaa.getId(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-3).getId());
         Assert.assertEquals(nbpCurrencyRateAaa.getCode(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-3).getCode());
         Assert.assertEquals(nbpCurrencyRateAaa.getMid(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-3).getMid());
+        Assert.assertEquals(nbpCurrencyRateAaa.getCurrencyName(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-3).getCurrencyName());
         Assert.assertEquals(nbpCurrencyRateBbb.getId(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-2).getId());
         Assert.assertEquals(nbpCurrencyRateBbb.getCode(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-2).getCode());
         Assert.assertEquals(nbpCurrencyRateBbb.getMid(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-2).getMid());
+        Assert.assertEquals(nbpCurrencyRateBbb.getCurrencyName(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-2).getCurrencyName());
         Assert.assertEquals(nbpCurrencyRateCcc.getId(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-1).getId());
         Assert.assertEquals(nbpCurrencyRateCcc.getCode(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-1).getCode());
         Assert.assertEquals(nbpCurrencyRateCcc.getMid(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-1).getMid());
+        Assert.assertEquals(nbpCurrencyRateCcc.getCurrencyName(), fetchedNbpCurrencyRates.get(fetchedNbpCurrencyRates.size()-1).getCurrencyName());
         //Clean up
         try {
             nbpRepository.delete(nbpCurrencyRates);
@@ -98,6 +103,7 @@ public class NbpRepositoryTestSuite {
         Assert.assertEquals(nbpCurrencyRateCcc.getId(), fetchedNbpCurrencyRate.get().getId());
         Assert.assertEquals(nbpCurrencyRateCcc.getCode(), fetchedNbpCurrencyRate.get().getCode());
         Assert.assertEquals(nbpCurrencyRateCcc.getMid(), fetchedNbpCurrencyRate.get().getMid());
+        Assert.assertEquals(nbpCurrencyRateCcc.getCurrencyName(), fetchedNbpCurrencyRate.get().getCurrencyName());
         //Clean up
         try {
             nbpRepository.delete(nbpCurrencyRates);
@@ -118,6 +124,7 @@ public class NbpRepositoryTestSuite {
         Assert.assertEquals(nbpCurrencyRateAaa.getId(), fetchedNbpCurrencyRate.get().getId());
         Assert.assertEquals(nbpCurrencyRateAaa.getCode(), fetchedNbpCurrencyRate.get().getCode());
         Assert.assertEquals(nbpCurrencyRateAaa.getMid(), fetchedNbpCurrencyRate.get().getMid());
+        Assert.assertEquals(nbpCurrencyRateAaa.getCurrencyName(), fetchedNbpCurrencyRate.get().getCurrencyName());
         //Clean up
         try {
             nbpRepository.delete(nbpCurrencyRates);

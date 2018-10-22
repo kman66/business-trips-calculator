@@ -24,8 +24,17 @@ public class NbpCurrencyRate {
     @Column(name = "MID")
     private BigDecimal mid;
 
+    @Column(name = "CURRENCY_NAME")
+    private String currencyName;
+
     public NbpCurrencyRate(String code, BigDecimal mid) {
         this.code = code;
         this.mid = mid;
+    }
+
+    public NbpCurrencyRate(String code, BigDecimal mid, String currencyName) {
+        this.code = code;
+        this.mid = mid;
+        this.currencyName = currencyName;
     }
 }

@@ -47,13 +47,14 @@ public class NbpCurrencyControllerTestSuite {
     public void shouldFetchCurrencies() throws Exception {
         //Given
         List<NbpCurrencyRateDto> currencyRateDtos = new ArrayList<>();
-        currencyRateDtos.add(new NbpCurrencyRateDto(1L, "TST", BigDecimal.valueOf(12.3)));
+        currencyRateDtos.add(new NbpCurrencyRateDto(1L, "TST", BigDecimal.valueOf(12.3), "Test name"));
         Mockito.when(nbpCurrencyController.getNbpCurrencies()).thenReturn(currencyRateDtos);
         //When & Then
         mockMvc.perform(get("/v1/currencies").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(jsonPath("$[0].code", Matchers.is("TST")))
-                .andExpect(jsonPath("$[0].mid", Matchers.is(12.3)));
+                .andExpect(jsonPath("$[0].mid", Matchers.is(12.3)))
+                .andExpect(jsonPath("$[0].currencyName", Matchers.is("Test name")));
     }
 }
