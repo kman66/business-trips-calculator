@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class NbpCurrencyRateMapper {
+
     public List<NbpCurrencyRateDto> mapToNbpCurrencyRateDtoList(final List<NbpCurrencyRate> nbpCurrencyRateList) {
         return nbpCurrencyRateList.stream()
                 .map(n -> getMapperFacade().map(n))

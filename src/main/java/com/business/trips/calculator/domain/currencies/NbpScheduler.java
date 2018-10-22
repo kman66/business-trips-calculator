@@ -10,7 +10,6 @@ public class NbpScheduler {
     @Autowired
     private NbpDbService nbpDbService;
 
-    //@Scheduled(fixedRate = 5000)
     @Scheduled(cron = "0 30 16 ? * MON-FRI")
     public void saveNbpCurrenciesAndEffectiveDate() {
         nbpDbService.saveNbpCurrencyRatesAndEffectiveDate();
