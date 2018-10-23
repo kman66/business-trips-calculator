@@ -59,10 +59,10 @@ public class CountryControllerTestSuite {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is("Test Country")))
-                .andExpect(jsonPath("$[0].nbpCurrencyRateDto.id", is(1)))
-                .andExpect(jsonPath("$[0].nbpCurrencyRateDto.code", is("ZZZ")))
-                .andExpect(jsonPath("$[0].nbpCurrencyRateDto.mid", is(0.01234)))
-                .andExpect(jsonPath("$[0].nbpCurrencyRateDto.currencyName", is("Test currency")));
+                .andExpect(jsonPath("$[0].currency.id", is(1)))
+                .andExpect(jsonPath("$[0].currency.code", is("ZZZ")))
+                .andExpect(jsonPath("$[0].currency.mid", is(0.01234)))
+                .andExpect(jsonPath("$[0].currency.currencyName", is("Test currency")));
 
     }
 
@@ -75,9 +75,9 @@ public class CountryControllerTestSuite {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Test Country")))
-                .andExpect(jsonPath("$.nbpCurrencyRateDto.id", is(1)))
-                .andExpect(jsonPath("$.nbpCurrencyRateDto.code", is("ZZZ")))
-                .andExpect(jsonPath("$.nbpCurrencyRateDto.mid", is(0.01234)))
-                .andExpect(jsonPath("$.nbpCurrencyRateDto.currencyName", is("Test currency")));
+                .andExpect(jsonPath("$.currency.id", is(1)))
+                .andExpect(jsonPath("$.currency.code", is("ZZZ")))
+                .andExpect(jsonPath("$.currency.mid", is(0.01234)))
+                .andExpect(jsonPath("$.currency.currencyName", is("Test currency")));
     }
 }

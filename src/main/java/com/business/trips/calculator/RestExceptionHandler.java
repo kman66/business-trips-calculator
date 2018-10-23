@@ -1,7 +1,9 @@
 package com.business.trips.calculator;
 
+import com.business.trips.calculator.domain.countries.CountryNotFoundException;
 import com.business.trips.calculator.domain.employee.EmployeeNotFoundException;
 import com.business.trips.calculator.domain.parameters.ParameterNotFoundException;
+import com.business.trips.calculator.domain.projects.ProjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ParameterNotFoundException.class})
     protected ResponseEntity<ErrorDetails> handleParameterNotFound(Exception ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        LOGGER.error("Error occured:", ex);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({CountryNotFoundException.class})
+    protected ResponseEntity<ErrorDetails> handleCountryNotFound(Exception ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        LOGGER.error("Error occured:", ex);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({ProjectNotFoundException.class})
+    protected ResponseEntity<ErrorDetails> handleProjectNotFound(Exception ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         LOGGER.error("Error occured:", ex);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
